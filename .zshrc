@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+#Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -81,11 +81,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+zstyle ':omz:plugins:nvm' lazy yes
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 
 alias ls='exa --icons'
 alias icat="kitty +kitten icat"
-alias uni="icat ~/Desktop/uni.png" 
+# alias uni="icat ~/Desktop/uni.png" 
 alias xau="shutdown now"
 alias windows="reboot"
 alias windows="reboot"
@@ -94,6 +95,7 @@ alias copy="xclip -rmlastnl -selection clipboard"
 alias lg="lazygit"
 alias up="docker compose up --build"
 alias down="docker compose down"
+alias reset-docker="sh ~/reset-docker.sh"
 
 
 # User configuration
@@ -132,9 +134,9 @@ alias redis-stop="/etc/init.d/redis-server stop"
 # alias docker-images="docker image ls"
 alias mongo-start="sudo systemctl start mongod"
 alias mongo-stop="sudo systemctl stop mongod"
-alias neofetch="fastfetch"
+# alias neofetch="fastfetch"
 alias mixer="alsamixer"
-alias cat="batcat"
+# alias cat="batcat"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -152,10 +154,38 @@ DISABLE_AUTO_UPDATE="true"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$HOME/.local/bin:$PATH
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
-printf " /\_/\\ \n( o.o ) \n > ^ < \n" | lolcat
+# printf " /\_/\\ \n( o.o ) \n > ^ < \n" | lolcat
 bindkey '^H' backward-kill-word
 
 
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
+
+
+# fnm
+FNM_PATH="/home/diogu/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/diogu/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+
+
+
+# function cd {
+#     builtin cd "$@" && ls -F
+#     }
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+
+export PATH="$HOME/.pyenv/shims:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
+
+
+
+
+
